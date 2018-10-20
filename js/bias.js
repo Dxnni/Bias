@@ -1,0 +1,1 @@
+document.write("<h1>Nothing is Without Bias</h1>");
