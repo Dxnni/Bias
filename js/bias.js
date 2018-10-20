@@ -1,5 +1,8 @@
 document.write("Everything has Bias");
 
+var pollers = new Array();
+
+
 var submit_bt = document.getElementById("submit_bt");
 
 submit_bt.onclick = submitButtonClicked
@@ -45,9 +48,13 @@ function submitButtonClicked(){
         else{
             temp_person.race = "Other";
         }
-    
 
-        console.log(temp_person);
+    
+        for(let i=0 ; i< pollers.length; i++){
+            poll[i].checked =false;
+        }
+        pollers.push(temp_person);
+        console.log(pollers)
 
 
 }
