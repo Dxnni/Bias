@@ -55,6 +55,5 @@ function submitButtonClicked(){
         }
         pollers.push(temp_person);
         console.log(pollers)
-
-
 }
+
