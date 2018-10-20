@@ -1,1 +1,1 @@
-document.write("<h1>Nothing is Without Bias</h1>");
+document.write("Everything has Bias");
