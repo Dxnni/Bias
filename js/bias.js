@@ -1,8 +1,10 @@
 document.write("Everything has Bias");
 
 var pollers = new Array();
-var stats = new Array();
-
+var stats = new Array(2);
+stats.forEach(row => {
+        row = new Array(5);
+})
 var BML = document.getElementById("BML");
 BML.innerHTML=5;
 
@@ -62,7 +64,7 @@ function submitButtonClicked(){
 
         if(poll[0].checked == true ){
                 temp_person.opinion = "Like";
-
+                stats[col][row].
         }
     
         else if (poll[1].checked == true ){
