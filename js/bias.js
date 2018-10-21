@@ -218,7 +218,7 @@ function updateStats(){
         diffRatioM = Math.abs(ratioM-avgGenderRatio);
         diffRatioF = Math.abs(ratioF-avgGenderRatio);
 
-        genderBias = (diffRatioM + diffRatioF)/2;        
+        genderBias = (diffRatioM + diffRatioF)/2*100;        
         
         // if((MLTnum/MTnum) > (FLTnum/FTnum)){
         //         genderBias=(1 - ((FLTnum/FTnum)/(MLTnum/MTnum)))*100;
@@ -281,7 +281,7 @@ function updateStats(){
         diffRatioA = Math.abs(ratioA-avgRaceRatio);
         diffRatioO = Math.abs(ratioO-avgRaceRatio);
 
-        racialBias = (diffRatioB + diffRatioW + diffRatioH + diffRatioA + diffRatioO)/5;
+        racialBias = (diffRatioB + diffRatioW + diffRatioH + diffRatioA + diffRatioO)/5*100;
                 
         // min = ratioB;
         // for(let i=0; i<5; i++){
@@ -313,5 +313,12 @@ function updateStats(){
                 racialProgressElem.style.backgroundColor= "#FF5C00";
 
         }
+
+
+        console.log(genderBias);
+        console.log(racialBias);
+        console.log();
+        console.log();
+        console.log();
 
 }
