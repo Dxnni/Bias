@@ -1,7 +1,7 @@
 Problem: People don't understand or are blind to biases that they/others have.
 What does it do?: Our app highlights biases in opinion surrounding content online.
 Benefit to User: 
-- Users **see** biases that were previously unknown or assumed
+- Users see biases that were previously unknown or assumed
 - Users recognize their own biases and how they relate to others
 - Tests for biases surrounding any issue
 
