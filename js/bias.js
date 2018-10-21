@@ -1,7 +1,7 @@
 document.write("Everything has Bias");
 
 var pollers = new Array();
-
+//initializing 2d array to represent both tables
 var stats = new Array(2);
 
 stats[0] = new Array(5);
@@ -13,6 +13,7 @@ for(let i=0;i<stats.length;i++){
         }
 }
 
+//initializing table variables
 var FBL = document.getElementById("FBL");
 FBL.innerHTML=stats[0][0].likes;
 var FWL = document.getElementById("FWL");
@@ -83,16 +84,9 @@ FDT.innerHTML=Number(FBD.innerHTML) + Number(FWD.innerHTML) + Number(FHD.innerHT
 var MDT = document.getElementById("MDT");
 MDT.innerHTML=Number(MBD.innerHTML) + Number(MWD.innerHTML) + Number(MHD.innerHTML) + Number(MAD.innerHTML) + Number(MOD.innerHTML);
 
-// var table = document.getElementsByTagName("tbody");
-// console.log(table);
 
 var submit_bt = document.getElementById("submit_bt");
 submit_bt.onclick = submitButtonClicked
-
-// var genderBias;
-// var genderProgressElem;
-// var MTnum;
-// var FTnum;
 
 // poll input radio
 function submitButtonClicked(){
@@ -170,7 +164,7 @@ function submitButtonClicked(){
 
 function updateStats(){
 
-
+        //tables
         FBL.innerHTML=stats[0][0].likes;
         FWL.innerHTML=stats[0][1].likes;
         FHL.innerHTML=stats[0][2].likes;
@@ -208,6 +202,7 @@ function updateStats(){
         MDT.innerHTML=Number(MBD.innerHTML) + Number(MWD.innerHTML) + Number(MHD.innerHTML) + Number(MAD.innerHTML) + Number(MOD.innerHTML);
 
 
+        //GENDER BIAS
         MLTnum = Number(MLT.innerHTML);
         MDTnum = Number(MDT.innerHTML);
         FLTnum = Number(FLT.innerHTML);
@@ -222,14 +217,9 @@ function updateStats(){
                 genderBias=0;
         }
 
-        likes = document.getElementById("likes");
-        likes.innerHTML = MLTnum + FLTnum;
-        dislikes = document.getElementById("dislikes");
-        dislikes.innerHTML = MDTnum + FDTnum;
         genderProgressElem = document.getElementById("genderProgress");
-        genderProgressElem.style.width = genderBias+"%";
+        genderProgressElem.style.width = genderBias.floor+"%";
         genderProgressElem.innerHTML = genderBias+ "%";
-        console.log(genderProgressElem);
         
         if(genderBias <= 25){
                 genderProgressElem.style.backgroundColor= "#FFA16C";
@@ -243,6 +233,63 @@ function updateStats(){
         }
         else{
                 genderProgressElem.style.backgroundColor= "#FF5C00";
+
+        }
+
+        //likes and dislikes
+        likes = document.getElementById("likes");
+        likes.innerHTML = MLTnum + FLTnum;
+        dislikes = document.getElementById("dislikes");
+        dislikes.innerHTML = MDTnum + FDTnum;
+
+        //RACIAL BIAS
+        BLTnum = Number(BLT.innerHTML);
+        WLTnum = Number(WLT.innerHTML);
+        HLTnum = Number(HLT.innerHTML);
+        ALTnum = Number(ALT.innerHTML);
+        OLTnum = Number(OLT.innerHTML);
+
+        BTnum = BLTnum + Number(BDT.innerHTML);
+        WTnum = wLTnum + Number(WDT.innerHTML);
+        HTnum = HLTnum + Number(HDT.innerHTML);
+        ATnum = ALTnum + Number(ADT.innerHTML);
+        OTnum = OLTnum + Number(ODT.innerHTML);
+
+        ratioB = BLTnum/BTnum;
+        ratioW = WLTnum/WTnum;
+        ratioH = HLTnum/HTnum;
+        ratioA = ALTnum/ATnum;
+        ratioO = OLTnum/OTnum;
+
+        avgRatio = (ratioB + ratioW + ratioH + ratioA + ratioO)/5;
+        ratios = [ratioB,ratioW,ratioH,ratioA,ratioO];
+        min = ratioB;
+        for(let i=0; i<5; i++){
+                if(ratios[i] < min){
+                        min = ratios[i];
+                }
+        }
+
+        result = min/avgRatio;
+        racialBias = (1-result)*100;
+
+        racialProgressElem = document.getElementById("raceProgress");
+        racialProgressElem.style.width = racialBias.floor+"%";
+        racialProgressElem.innerHTML = racialBias+ "%";
+
+
+        if(racialBias <= 25){
+                racialProgressElem.style.backgroundColor= "#FFA16C";
+        }
+        else if(racialBias <= 50){
+                racialProgressElem.style.backgroundColor= "#FF8641";
+        }
+        else if(racialBias <=75){
+                racialProgressElem.style.backgroundColor= "#FF6813";
+
+        }
+        else{
+                racialProgressElem.style.backgroundColor= "#FF5C00";
 
         }
 
