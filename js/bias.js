@@ -44,7 +44,7 @@ ALT.innerHTML=Number(FAL.innerHTML) + Number(MAL.innerHTML);
 var OLT = document.getElementById("OLT");
 OLT.innerHTML=Number(FOL.innerHTML) + Number(MOL.innerHTML);
 var FLT = document.getElementById("FLT");
-FLT.innerHTML=Number(FBL.innerHTML) + Number(FWL.innerHTML) + Number(FHL.innerHTML) + Number(FAL.innerHTML) + Number(FOL.innerHTML);
+FLT.innerHTML=0;//Number(FBL.innerHTML) + Number(FWL.innerHTML) + Number(FHL.innerHTML) + Number(FAL.innerHTML) + Number(FOL.innerHTML);
 var MLT = document.getElementById("MLT");
 MLT.innerHTML=Number(MBL.innerHTML) + Number(MWL.innerHTML) + Number(MHL.innerHTML) + Number(MAL.innerHTML) + Number(MOL.innerHTML);
 
@@ -83,14 +83,16 @@ FDT.innerHTML=Number(FBD.innerHTML) + Number(FWD.innerHTML) + Number(FHD.innerHT
 var MDT = document.getElementById("MDT");
 MDT.innerHTML=Number(MBD.innerHTML) + Number(MWD.innerHTML) + Number(MHD.innerHTML) + Number(MAD.innerHTML) + Number(MOD.innerHTML);
 
-var table = document.getElementsByTagName("tbody");
-console.log(table);
-
+// var table = document.getElementsByTagName("tbody");
+// console.log(table);
 
 var submit_bt = document.getElementById("submit_bt");
-
 submit_bt.onclick = submitButtonClicked
 
+// var genderBias;
+// var genderProgressElem;
+// var MTnum;
+// var FTnum;
 
 // poll input radio
 function submitButtonClicked(){
@@ -161,11 +163,14 @@ function submitButtonClicked(){
 
         pollers.push(temp_person);
 
-        updateTables();
+        updateStats();
+        console.log(stats);
 
 }
 
-function updateTables(){
+function updateStats(){
+
+
         FBL.innerHTML=stats[0][0].likes;
         FWL.innerHTML=stats[0][1].likes;
         FHL.innerHTML=stats[0][2].likes;
@@ -181,7 +186,7 @@ function updateTables(){
         HLT.innerHTML=Number(FHL.innerHTML) + Number(MHL.innerHTML);
         ALT.innerHTML=Number(FAL.innerHTML) + Number(MAL.innerHTML);
         OLT.innerHTML=Number(FOL.innerHTML) + Number(MOL.innerHTML);
-        FLT.innerHTML=Number(FBL.innerHTML) + Number(FWL.innerHTML) + Number(FHL.innerHTML) + Number(FAL.innerHTML) + Number(FOL.innerHTML);
+        FLT.innerHTML=stats[0][0].likes + stats[0][1].likes + stats[0][2].likes + stats[0][3].likes + stats[0][4].likes;
         MLT.innerHTML=Number(MBL.innerHTML) + Number(MWL.innerHTML) + Number(MHL.innerHTML) + Number(MAL.innerHTML) + Number(MOL.innerHTML);
 
         FBD.innerHTML=stats[0][0].dislikes;
@@ -201,5 +206,32 @@ function updateTables(){
         ODT.innerHTML=Number(FOD.innerHTML) + Number(MOD.innerHTML);
         FDT.innerHTML=Number(FBD.innerHTML) + Number(FWD.innerHTML) + Number(FHD.innerHTML) + Number(FAD.innerHTML) + Number(FOD.innerHTML);
         MDT.innerHTML=Number(MBD.innerHTML) + Number(MWD.innerHTML) + Number(MHD.innerHTML) + Number(MAD.innerHTML) + Number(MOD.innerHTML);
+
+
+        MLTnum = Number(MLT.innerHTML);
+        MDTnum = Number(MDT.innerHTML);
+        FLTnum = Number(FLT.innerHTML);
+        FDTnum = Number(FDT.innerHTML);
+        MTnum = MLTnum + MDTnum;
+        FTnum = FLTnum + FDTnum;
+        if((MLTnum/MTnum) > (FLTnum/FTnum)){
+                genderBias=(FLTnum/FTnum)/(MLTnum/MTnum)*100;
+        }else if((MLTnum/MTnum) < (FLTnum/FTnum)){
+                genderBias=(MLTnum/MTnum)/(FLTnum/FTnum)*100;
+        }else{
+                genderBias=0;
+        }
+
+        likes = document.getElementById("likes");
+        likes.innerHTML = MLTnum + FLTnum;
+        dislikes = document.getElementById("dislikes");
+        dislikes.innerHTML = MDTnum + FDTnum;
+        
+        console.log(genderBias);
+        genderProgressElem = document.getElementById("genderProgress");
+        genderProgressElem.style.width = genderBias;
+        // document.getElementById("genderProgress").style.width = genderBias+"";
+        // document.getElementById("genderProgress").setAttribute("width", genderBias);
+
 
 }
