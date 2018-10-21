@@ -209,16 +209,27 @@ function updateStats(){
         FDTnum = Number(FDT.innerHTML);
         MTnum = MLTnum + MDTnum;
         FTnum = FLTnum + FDTnum;
-        if((MLTnum/MTnum) > (FLTnum/FTnum)){
-                genderBias=(1 - ((FLTnum/FTnum)/(MLTnum/MTnum)))*100;
-        }else if((MLTnum/MTnum) < (FLTnum/FTnum)){
-                genderBias=(1 - ((MLTnum/MTnum)/(FLTnum/FTnum))*100);
-        }else{
-                genderBias=0;
-        }
+        
+        ratioM = MLTnum/MTnum;
+        ratioF = FLTnum/FTnum;
+
+        avgGenderRatio = (ratioM + ratioF)/2;
+
+        diffRatioM = Math.abs(ratioM-avgGenderRatio);
+        diffRatioF = Math.abs(ratioF-avgGenderRatio);
+
+        genderBias = (diffRatioM + diffRatioF)/2;        
+        
+        // if((MLTnum/MTnum) > (FLTnum/FTnum)){
+        //         genderBias=(1 - ((FLTnum/FTnum)/(MLTnum/MTnum)))*100;
+        // }else if((MLTnum/MTnum) < (FLTnum/FTnum)){
+        //         genderBias=(1 - ((MLTnum/MTnum)/(FLTnum/FTnum))*100);
+        // }else{
+        //         genderBias=0;
+        // }
 
         genderProgressElem = document.getElementById("genderProgress");
-        genderProgressElem.style.width = genderBias.floor+"%";
+        genderProgressElem.style.width = genderBias+"%";
         genderProgressElem.innerHTML = genderBias+ "%";
         
         if(genderBias <= 25){
@@ -250,7 +261,7 @@ function updateStats(){
         OLTnum = Number(OLT.innerHTML);
 
         BTnum = BLTnum + Number(BDT.innerHTML);
-        WTnum = wLTnum + Number(WDT.innerHTML);
+        WTnum = WLTnum + Number(WDT.innerHTML);
         HTnum = HLTnum + Number(HDT.innerHTML);
         ATnum = ALTnum + Number(ADT.innerHTML);
         OTnum = OLTnum + Number(ODT.innerHTML);
@@ -261,21 +272,31 @@ function updateStats(){
         ratioA = ALTnum/ATnum;
         ratioO = OLTnum/OTnum;
 
-        avgRatio = (ratioB + ratioW + ratioH + ratioA + ratioO)/5;
-        ratios = [ratioB,ratioW,ratioH,ratioA,ratioO];
-        min = ratioB;
-        for(let i=0; i<5; i++){
-                if(ratios[i] < min){
-                        min = ratios[i];
-                }
-        }
+        avgRaceRatio = (ratioB + ratioW + ratioH + ratioA + ratioO)/5;
+        //ratios = [ratioB,ratioW,ratioH,ratioA,ratioO];
 
-        result = min/avgRatio;
-        racialBias = (1-result)*100;
+        diffRatioB = Math.abs(ratioB-avgRaceRatio);
+        diffRatioW = Math.abs(ratioW-avgRaceRatio);
+        diffRatioH = Math.abs(ratioH-avgRaceRatio);
+        diffRatioA = Math.abs(ratioA-avgRaceRatio);
+        diffRatioO = Math.abs(ratioO-avgRaceRatio);
+
+        racialBias = (diffRatioB + diffRatioW + diffRatioH + diffRatioA + diffRatioO)/5;
+                
+        // min = ratioB;
+        // for(let i=0; i<5; i++){
+        //         if(ratios[i] < min){
+        //                 min = ratios[i];
+        //         }
+        // }
+
+        // result = min/avgRatio;
+        // racialBias = (1-result)*100;
 
         racialProgressElem = document.getElementById("raceProgress");
-        racialProgressElem.style.width = racialBias.floor+"%";
+        racialProgressElem.style.width = racialBias+"%";
         racialProgressElem.innerHTML = racialBias+ "%";
+        //console.log(racialBias);
 
 
         if(racialBias <= 25){
