@@ -218,7 +218,7 @@ function updateStats(){
         diffRatioM = Math.abs(ratioM-avgGenderRatio);
         diffRatioF = Math.abs(ratioF-avgGenderRatio);
 
-        genderBias = (diffRatioM + diffRatioF)/2*100;        
+        genderBias = Math.floor((diffRatioM + diffRatioF)/2*100);        
         
         // if((MLTnum/MTnum) > (FLTnum/FTnum)){
         //         genderBias=(1 - ((FLTnum/FTnum)/(MLTnum/MTnum)))*100;
@@ -236,14 +236,14 @@ function updateStats(){
                 genderProgressElem.style.backgroundColor= "#FFA16C";
         }
         else if(genderBias <= 50){
-                genderProgressElem.style.backgroundColor= "#FF8641";
+                genderProgressElem.style.backgroundColor= "#FF5C00";
         }
         else if(genderBias <=75){
-                genderProgressElem.style.backgroundColor= "#FF6813";
+                genderProgressElem.style.backgroundColor= "#B80024";
 
         }
         else{
-                genderProgressElem.style.backgroundColor= "#FF5C00";
+                genderProgressElem.style.backgroundColor= "#46000E";
 
         }
 
@@ -266,11 +266,40 @@ function updateStats(){
         ATnum = ALTnum + Number(ADT.innerHTML);
         OTnum = OLTnum + Number(ODT.innerHTML);
 
+       if(BTnum == 0){
+        ratioB = 0;
+       }
+       else{
         ratioB = BLTnum/BTnum;
+       }
+
+       if(WTnum == 0){
+               ratioW = 0;
+       }
+       else{
         ratioW = WLTnum/WTnum;
+       }
+
+       if(HTnum == 0){
+        ratioH = 0;
+       }
+       else{
         ratioH = HLTnum/HTnum;
+       }
+        
+        if(ATnum == 0){
+        ratioA = 0;
+        }
+        else{
         ratioA = ALTnum/ATnum;
+       }
+
+        if(OTnum == 0){
+        ratioO = 0;
+        }
+        else{
         ratioO = OLTnum/OTnum;
+        }
 
         avgRaceRatio = (ratioB + ratioW + ratioH + ratioA + ratioO)/5;
         //ratios = [ratioB,ratioW,ratioH,ratioA,ratioO];
@@ -281,7 +310,7 @@ function updateStats(){
         diffRatioA = Math.abs(ratioA-avgRaceRatio);
         diffRatioO = Math.abs(ratioO-avgRaceRatio);
 
-        racialBias = (diffRatioB + diffRatioW + diffRatioH + diffRatioA + diffRatioO)/5*100;
+        racialBias = Math.floor((diffRatioB + diffRatioW + diffRatioH + diffRatioA + diffRatioO)/5*100);
                 
         // min = ratioB;
         // for(let i=0; i<5; i++){
@@ -303,14 +332,14 @@ function updateStats(){
                 racialProgressElem.style.backgroundColor= "#FFA16C";
         }
         else if(racialBias <= 50){
-                racialProgressElem.style.backgroundColor= "#FF8641";
+                racialProgressElem.style.backgroundColor= "#FF5C00";
         }
         else if(racialBias <=75){
-                racialProgressElem.style.backgroundColor= "#FF6813";
+                racialProgressElem.style.backgroundColor= "#B80024";
 
         }
         else{
-                racialProgressElem.style.backgroundColor= "#FF5C00";
+                racialProgressElem.style.backgroundColor= "#46000E";
 
         }
 
