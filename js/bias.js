@@ -226,13 +226,8 @@ function updateStats(){
         likes.innerHTML = MLTnum + FLTnum;
         dislikes = document.getElementById("dislikes");
         dislikes.innerHTML = MDTnum + FDTnum;
-        
-        console.log(genderBias);
         genderProgressElem = document.getElementById("genderProgress");
-        genderProgressElem.style.width = ""+genderBias;
-        console.log(genderProgressElem);
-        // document.getElementById("genderProgress").style.width = genderBias+"";
-        // document.getElementById("genderProgress").setAttribute("width", genderBias);
+        genderProgressElem.style.width = genderBias+"%";
 
 
 }
