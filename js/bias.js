@@ -215,9 +215,9 @@ function updateStats(){
         MTnum = MLTnum + MDTnum;
         FTnum = FLTnum + FDTnum;
         if((MLTnum/MTnum) > (FLTnum/FTnum)){
-                genderBias=(FLTnum/FTnum)/(MLTnum/MTnum)*100;
+                genderBias=(1 - ((FLTnum/FTnum)/(MLTnum/MTnum)))*100;
         }else if((MLTnum/MTnum) < (FLTnum/FTnum)){
-                genderBias=(MLTnum/MTnum)/(FLTnum/FTnum)*100;
+                genderBias=(1 - ((MLTnum/MTnum)/(FLTnum/FTnum))*100);
         }else{
                 genderBias=0;
         }
@@ -228,6 +228,22 @@ function updateStats(){
         dislikes.innerHTML = MDTnum + FDTnum;
         genderProgressElem = document.getElementById("genderProgress");
         genderProgressElem.style.width = genderBias+"%";
+        genderProgressElem.innerHTML = genderBias+ "%";
+        console.log(genderProgressElem);
+        
+        if(genderBias <= 25){
+                genderProgressElem.style.backgroundColor= "#FFA16C";
+        }
+        else if(genderBias <= 50){
+                genderProgressElem.style.backgroundColor= "#FF8641";
+        }
+        else if(genderBias <=75){
+                genderProgressElem.style.backgroundColor= "#FF6813";
 
+        }
+        else{
+                genderProgressElem.style.backgroundColor= "#FF5C00";
+
+        }
 
 }
